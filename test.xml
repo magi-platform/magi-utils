@@ -1,0 +1,15 @@
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>asdf</value>
+    </property>
+    <property>
+        <name>fs.default.name</name>
+        <value>hdfs://namenode.original:9000</value>
+        <final>true</final>
+    </property>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/opt/app/tmp</value>
+    </property>
+</configuration>

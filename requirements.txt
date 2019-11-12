@@ -1,0 +1,6 @@
+pyyaml
+nose
+sphinx
+argparse
+beautifulsoup4
+vkbeautify
