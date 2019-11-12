@@ -1,4 +1,5 @@
-Interstellar
+Magi Utils
 ========================
+https://travis-ci.com/magi-platform/magi-utils.svg?branch=master
 
-This is YAML baased automation suite for provisioning a Kafka environment.
+TODO
