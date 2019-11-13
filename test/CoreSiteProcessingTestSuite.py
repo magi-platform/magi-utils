@@ -1,50 +1,47 @@
 # -*- coding: utf-8 -*-
 import unittest
 from os import environ
-from hdfs.helpers import process, read_xml
-import xml.etree.ElementTree as ElementTree
+
+from common.helpers import read_xml
+from hdfs.helpers import process
+from test.assertions import verify_prop_values
 
 
 class CoreSiteProcessingTestSuite( unittest.TestCase ):
+    core_site_file = "core-site.xml"
 
     def setUp( self ):
         conf_dir = "test/resources"
         environ[ "CONF_DIR" ] = conf_dir
 
-    def check_prop_value( self, doc: ElementTree, name: str, value: str ) -> bool:
-        matches = False
-        for prop in doc.findall( "property" ):
-            if prop.find( "name" ).text == name and prop.find( "value" ).text == value:
-                matches = True
-        return matches
-
     def test_replace_namenode_address( self ):
         conf_dir = environ.get( "CONF_DIR" )
         environ[ "HDFS_NAMENODE_ADDRESS" ] = "hdfs://namenode.magi.io:9000"
 
-        xml = read_xml( f"{conf_dir}/core-site.xml" )
+        xml = read_xml( conf_dir, self.core_site_file )
         output = process( xml )
-        assert (self.check_prop_value( output, "fs.defaultFS", "hdfs://namenode.magi.io:9000" ))
+
+        assert (verify_prop_values( output, "fs.defaultFS", environ[ "HDFS_NAMENODE_ADDRESS" ] ))
 
     def test_replace_namenode_name( self ):
         conf_dir = environ.get( "CONF_DIR" )
         environ[ "HDFS_NAMENODE_NAME" ] = "hdfs://namenode.magi.io:9000"
 
-        xml = read_xml( f"{conf_dir}/core-site.xml" )
+        xml = read_xml( conf_dir, self.core_site_file )
         output = process( xml )
-        assert (self.check_prop_value( output, "fs.default.name", "hdfs://namenode.magi.io:9000" ))
+
+        assert (verify_prop_values( output, "fs.default.name", environ[ "HDFS_NAMENODE_NAME" ] ))
 
     def test_replace_all_supported_properties( self ):
         conf_dir = environ.get( "CONF_DIR" )
-
         environ[ "HDFS_NAMENODE_ADDRESS" ] = "hdfs://namenode.magi.io:9000"
         environ[ "HDFS_NAMENODE_NAME" ] = "hdfs://namenode.magi.io:9000"
-        xml = read_xml( f"{conf_dir}/core-site.xml" )
 
+        xml = read_xml( conf_dir, self.core_site_file )
         output = process( xml )
 
-        assert (self.check_prop_value( output, "fs.defaultFS", "hdfs://namenode.magi.io:9000" ))
-        assert (self.check_prop_value( output, "fs.default.name", "hdfs://namenode.magi.io:9000" ))
+        assert (verify_prop_values( output, "fs.defaultFS", environ[ "HDFS_NAMENODE_ADDRESS" ] ))
+        assert (verify_prop_values( output, "fs.default.name", environ[ "HDFS_NAMENODE_NAME" ] ))
 
 
 if __name__ == '__main__':

@@ -6,8 +6,8 @@ from hdfs.helpers import process
 from common.helpers import read_xml, overwrite_file
 
 if __name__ == '__main__':
-    conf_dir = environ.get( "CONF_DIR" ) if environ.get( "CONF_DIR" ) else "/opt/hadoop/conf/hadoop"
-    filename = "core-site.xml"
+    conf_dir = environ.get( "CONF_DIR" ) if environ.get( "CONF_DIR" ) else "/opt/hbase/conf"
+    filename = "hbase-site.xml"
     print( f"using configuration: {conf_dir}/{filename}" )
     xml = read_xml( conf_dir, filename )
 
