@@ -1,7 +1,6 @@
 import xml.etree.ElementTree as ElementTree
 
 from os import environ, rename
-from re import match
 from xml.dom import minidom
 
 

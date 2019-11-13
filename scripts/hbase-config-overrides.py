@@ -2,8 +2,8 @@
 
 from os import environ
 
-from hdfs.helpers import process
 from common.helpers import read_xml, overwrite_file
+from hdfs.helpers import process
 
 if __name__ == '__main__':
     conf_dir = environ.get( "CONF_DIR" ) if environ.get( "CONF_DIR" ) else "/opt/hbase/conf"
