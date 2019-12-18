@@ -13,13 +13,13 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='sample',
-    version='0.1.0',
-    description='Sample package for Python-Guide.org',
+    name='magi-utils',
+    version='1.0.0',
+    description='Utilities for running Magi HDFS/HBase/Spark containers in environments like AWS',
     long_description=readme,
-    author='Kenneth Reitz',
-    author_email='me@kennethreitz.com',
-    url='https://github.com/kennethreitz/samplemod',
+    author='Michael Reynolds',
+    author_email='reynoldsm88@gmail.com',
+    url='https://github.com/magi-platform/magi-utils',
     license=license,
-    packages=find_packages(exclude=('test', 'docs'))
+    packages=find_packages(exclude=('test', 'docs') )
 )
