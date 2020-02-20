@@ -5,8 +5,10 @@ from common.helpers import overwrite_prop, get_env
 
 
 def do_property_overrides( core_site: ElementTree, hdfs_props: dict ) -> ElementTree:
-    namenode_address = hdfs_props[ "HDFS_NAMENODE_ADDRESS" ] if "HDFS_NAMENODE_ADDRESS" in hdfs_props.keys() else None
-    namenode_name = hdfs_props[ "HDFS_NAMENODE_NAME" ] if "HDFS_NAMENODE_NAME" in hdfs_props.keys() else None
+    namenode_address = hdfs_props.get( "HDFS_NAMENODE_ADDRESS", None )
+    namenode_name = hdfs_props.get( "HDFS_NAMENODE_NAME", None )
+    namenode_http_port = hdfs_props.get( "HDFS_HTTP_PORT", None )
+    namenode_https_port = hdfs_props.get( "HDFS_HTTPS_PORT", None )
     if namenode_address is not None:
         print( "reset namenode addr" )
         if match( "hdfs:\/\/[a-zA-Z0-9.-]+(:\d{0,5})?", namenode_address ):
@@ -16,6 +18,12 @@ def do_property_overrides( core_site: ElementTree, hdfs_props: dict ) -> Element
     if namenode_name is not None:
         print( "reset namenode name" )
         overwrite_prop( core_site, "fs.default.name", namenode_name )
+    if namenode_http_port is not None:
+        print( "reset namenode http port" )
+        overwrite_prop( core_site, "dfs.http.address", namenode_http_port )
+    if namenode_https_port is not None:
+        print( "reset namenode https port" )
+        overwrite_prop( core_site, "dfs.https.address", namenode_https_port )
     return core_site
 
 

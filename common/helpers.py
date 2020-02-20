@@ -29,6 +29,12 @@ def overwrite_prop( doc: ElementTree, prop_name: str, value: str ):
         if prop.find( "name" ).text == prop_name:
             print( f'replacing {prop_name} : {prop.find( "value" ).text} with {value}' )
             prop.find( "value" ).text = value  ## careful, this modifies the doc
+            break
+    else:
+        print( f'adding {prop_name} : {value}' )
+        new_prop = ElementTree.SubElement( doc.getroot(), 'property' )
+        ElementTree.SubElement( new_prop, 'name' ).text = prop_name
+        ElementTree.SubElement( new_prop, 'value' ).text = value
 
 
 def overwrite_file( conf_dir: str, file: str, content: ElementTree ):

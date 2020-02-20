@@ -5,9 +5,9 @@ from common.helpers import overwrite_prop, get_env
 
 
 def do_property_overrides( hbase_site: ElementTree, hdfs_props: dict ) -> ElementTree:
-    hbase_root_dir = hdfs_props[ "HBASE_ROOT_DIR" ] if "HBASE_ROOT_DIR" in hdfs_props.keys() else None
-    zookeeper_host = hdfs_props[ "HBASE_ZOOKEEPER_HOST" ] if "HBASE_ZOOKEEPER_HOST" in hdfs_props.keys() else None
-    zookeeper_port = hdfs_props[ "HBASE_ZOOKEEPER_PORT" ] if "HBASE_ZOOKEEPER_PORT" in hdfs_props.keys() else None
+    hbase_root_dir = hdfs_props.get( "HBASE_ROOT_DIR", None )
+    zookeeper_host = hdfs_props.get( "HBASE_ZOOKEEPER_HOST", None )
+    zookeeper_port = hdfs_props.get( "HBASE_ZOOKEEPER_PORT", None )
     if hbase_root_dir is not None:
         print( f"reset hbase root.dir {hbase_root_dir}" )
         if match( "hdfs:\/\/[a-zA-Z0-9.-]+(:\d{0,5})?\/[a-zA-Z0-9.-]+", hbase_root_dir ):

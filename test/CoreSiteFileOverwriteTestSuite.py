@@ -26,6 +26,7 @@ class CoreSiteFileOverwriteTestSuite( unittest.TestCase ):
     def test_overwrite_core_site( self ):
         environ[ "HDFS_NAMENODE_ADDRESS" ] = "hdfs://namenode.magi.io:9000"
         environ[ "HDFS_NAMENODE_NAME" ] = "hdfs://namenode.magi.io:9000"
+        environ[ "HDFS_HTTP_PORT" ] = "1337"
         conf_dir = environ.get( "CONF_DIR" )
         original = read_xml( conf_dir, self.filename )
         processed = process( original )
@@ -34,6 +35,7 @@ class CoreSiteFileOverwriteTestSuite( unittest.TestCase ):
         updated = read_xml( conf_dir, self.filename )
         assert (verify_prop_values( updated, "fs.defaultFS", environ[ "HDFS_NAMENODE_ADDRESS" ] ))
         assert (verify_prop_values( updated, "fs.default.name", environ[ "HDFS_NAMENODE_NAME" ] ))
+        assert (verify_prop_values( updated, "dfs.http.address", environ[ "HDFS_HTTP_PORT" ] ))
 
 
 if __name__ == '__main__':
