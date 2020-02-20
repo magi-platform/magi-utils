@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+
+    <property>
+        <name>dfs.http.address</name>
+        <value>1234</value>
+    </property>
+    <property>
+        <name>dfs.https.address</name>
+        <value>1234</value>
+        <final>true</final>
+    </property>
+
+    <property>
+        <name>dfs.datanode.http.addresss</name>
+        <value>1234</value>
+    </property>
+    <property>
+        <name>dfs.datanode.https.address</name>
+        <value>1234</value>
+        <final>true</final>
+    </property>
+
+    <property>
+        <name>dfs.datanode.address</name>
+        <value>1234</value>
+    </property>
+    <property>
+        <name>dfs.datanode.ipc.address</name>
+        <value>1234</value>
+        <final>true</final>
+    </property>
+
+</configuration>

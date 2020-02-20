@@ -3,7 +3,7 @@ import unittest
 from os import environ
 
 from common.helpers import read_xml
-from hdfs.helpers import process
+from hdfs.helpers import process_core_site
 from test.assertions import verify_prop_values
 
 
@@ -19,7 +19,7 @@ class CoreSiteProcessingTestSuite( unittest.TestCase ):
         environ[ "HDFS_NAMENODE_ADDRESS" ] = "hdfs://namenode.magi.io:9000"
 
         xml = read_xml( conf_dir, self.core_site_file )
-        output = process( xml )
+        output = process_core_site( xml )
 
         assert (verify_prop_values( output, "fs.defaultFS", environ[ "HDFS_NAMENODE_ADDRESS" ] ))
 
@@ -28,7 +28,7 @@ class CoreSiteProcessingTestSuite( unittest.TestCase ):
         environ[ "HDFS_NAMENODE_NAME" ] = "hdfs://namenode.magi.io:9000"
 
         xml = read_xml( conf_dir, self.core_site_file )
-        output = process( xml )
+        output = process_core_site( xml )
 
         assert (verify_prop_values( output, "fs.default.name", environ[ "HDFS_NAMENODE_NAME" ] ))
 
@@ -38,7 +38,7 @@ class CoreSiteProcessingTestSuite( unittest.TestCase ):
         environ[ "HDFS_NAMENODE_NAME" ] = "hdfs://namenode.magi.io:9000"
 
         xml = read_xml( conf_dir, self.core_site_file )
-        output = process( xml )
+        output = process_core_site( xml )
 
         assert (verify_prop_values( output, "fs.defaultFS", environ[ "HDFS_NAMENODE_ADDRESS" ] ))
         assert (verify_prop_values( output, "fs.default.name", environ[ "HDFS_NAMENODE_NAME" ] ))
